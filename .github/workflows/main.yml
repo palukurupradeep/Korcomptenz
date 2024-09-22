@@ -6,3 +6,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@main
+      - run: |
+          docker build -t testimage:1.0.0 Applicationcode
+          docker images
