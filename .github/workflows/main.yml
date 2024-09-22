@@ -8,14 +8,19 @@ jobs:
         uses: actions/checkout@main
       - run: |
           docker build -t testimage:1.0.0 Applicationcode
+          docker build -t testimage1:1.0.0 Applicationcode1
           docker images
           docker login ${{ secrets.JFROG_URL }} --username pradeepgowtham04@gmail.com --password ${{ secrets.JFROG_API }}
           docker tag testimage:1.0.0 asuuki.jfrog.io/pradeep/testimage:1.0.0
+          docker tag testimage1:1.0.0 asuuki.jfrog.io/pradeep/testimage1:1.0.0   
           docker images
           docker push asuuki.jfrog.io/pradeep/testimage:1.0.0
+          docker push asuuki.jfrog.io/pradeep/testimage1:1.0.0
           az login --service-principal --username ${{ secrets.REGISTRY_USERNAME }} --password ${{ secrets.REGISTRY_PASSWORD }} --tenant 3d993c04-128c-48de-ba4a-1afbb101cfa1
           az acr login --name ${{ secrets.REGISTRY_LOGIN_SERVER }}
           docker tag asuuki.jfrog.io/pradeep/testimage:1.0.0 ${{ secrets.REGISTRY_LOGIN_SERVER }}/testimage:1.0.0
+          docker tag asuuki.jfrog.io/pradeep/testimage1:1.0.0 ${{ secrets.REGISTRY_LOGIN_SERVER }}/testimage1:1.0.0
           docker images
           docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/testimage:1.0.0
+          docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/testimage1:1.0.0
 
