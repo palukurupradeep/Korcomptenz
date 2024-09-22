@@ -15,4 +15,7 @@ jobs:
           docker push asuuki.jfrog.io/pradeep/testimage:1.0.0
           az login --service-principal --username ${{ secrets.REGISTRY_USERNAME }} --password ${{ secrets.REGISTRY_PASSWORD }} --tenant 3d993c04-128c-48de-ba4a-1afbb101cfa1
           az acr login --name ${{ secrets.REGISTRY_LOGIN_SERVER }}
+          docker tag asuuki.jfrog.io/pradeep/testimage:1.0.0 ${{ secrets.REGISTRY_LOGIN_SERVER }}/testimage:1.0.0
+          docker images
+          docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/testimage:1.0.0
 
