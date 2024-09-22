@@ -9,3 +9,5 @@ jobs:
       - run: |
           docker build -t testimage:1.0.0 Applicationcode
           docker images
+          docker login ${{ secrets.JFROG_URL }} --username pradeepgowtham04@gmail.com --password ${{ secrets.JFROG_API }}
+
